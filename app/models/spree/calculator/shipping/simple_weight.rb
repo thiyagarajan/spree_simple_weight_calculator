@@ -12,7 +12,7 @@ module Spree
       #                :preferred_default_weight
 
       def self.description
-        Spree.t(:simple_weight)
+        Spree.t(:ship_by_weight)
       end
 
       def self.register
@@ -48,16 +48,16 @@ module Spree
 
       def costs_string_valid?
         !preferred_costs_string.empty? &&
-        preferred_costs_string.count(':') > 0 &&
-        preferred_costs_string.split(/\:|\n/).size.even? &&
-        preferred_costs_string.split(/\:|\n/).all? { |s | s.match(/^\d|\.+$/) }
+            preferred_costs_string.count(':') > 0 &&
+            preferred_costs_string.split(/\:|\n/).size.even? &&
+            preferred_costs_string.split(/\:|\n/).all? { |s| s.match(/^\d|\.+$/) }
       end
 
       def item_oversized?(item)
         return false if preferred_max_item_size == 0
 
         variant = item.variant
-        sizes = [ variant.width || 0, variant.depth || 0, variant.height || 0 ]
+        sizes = [variant.width || 0, variant.depth || 0, variant.height || 0]
 
         sizes.max > preferred_max_item_size
       end
